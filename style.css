@@ -42,6 +42,7 @@ hr{
     margin-top: 5px;
     padding: 0;
 }
+
 h2{
     text-align: center;
     font-size: 40px;
@@ -64,12 +65,13 @@ p, button, input{
 }
 
 #question{
-    width: 186px;
-    margin: 18px 0px 0px 0px;
+    /* width: 186px; */
+    margin: 19px 0px 0px 0px;
     text-align: center;
+    height: 24px;
 }
 .animateP {
-    animation: slideAndFade 4s forwards;
+    animation: slideAndFade 2s forwards;
 }
 @keyframes slideAndFade {
     0% {
@@ -82,6 +84,27 @@ p, button, input{
     }
     51% {
         transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+.animatePBack {
+    animation: slideAndFadeBack 2s forwards;
+}
+@keyframes slideAndFadeBack {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    50% {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    51% {
+        transform: translateX(-100%);
         opacity: 0;
     }
     100% {
@@ -110,10 +133,10 @@ p, button, input{
     width: 214px;
     justify-content: center;
     align-items: center;
-    margin-top: 30px;
+    margin-top: 32px;
 }
 .animateOut {
-    animation: slideOut 1.5s forwards;
+    animation: slideOut 1s forwards;
 }
 @keyframes slideOut {
     0% {
@@ -122,6 +145,19 @@ p, button, input{
     }
     100% {
         transform: translateX(-100%);
+        opacity: 0;
+    }
+}
+.animateOutBack {
+    animation: slideOutBack 1s forwards;
+}
+@keyframes slideOutBack {
+    0% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateX(100%);
         opacity: 0;
     }
 }
@@ -146,20 +182,33 @@ p, button, input{
     border: 1px solid black;
     border-radius: 50px;
     width: 130px;
-    height: 23px;
+    height: 22px;
     box-shadow: 1px 3px 0px black;
     outline: none;
     padding: 0px 15px 0px 15px;
     display: none;
-    margin: 17px 0px 0px 0px;
+    margin: 6px 0px 0px 0px;
 }
 
 .animateInside {
-    animation: slideInside 2s forwards;
+    animation: slideInside 1s forwards;
 }
 @keyframes slideInside {
     0% {
         transform: translateX(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+.animateInsideBack {
+    animation: slideInsideBack 1s forwards;
+}
+@keyframes slideInsideBack {
+    0% {
+        transform: translateX(-100%);
         opacity: 0;
     }
     100% {
@@ -175,7 +224,6 @@ p, button, input{
     margin: 18px 0px 0px 3px;
     display: none;
 }
-
 svg{
     position: absolute;
 }
@@ -192,15 +240,84 @@ svg{
     margin-right: 291px;
     margin-top: 238px;
 }
-#el4{
-    
+
+.test{
+    display:none;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: 78px;
+    width: inherit;
+    margin-top: 17px;
 }
-#el5{
-    
+.punkt{
+    display: flex;
+    gap: 10px;
+    align-content: center;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    flex-direction: row;
 }
-#el6{
-    
+#allergy{
+    border-right: 0px;
+    border-left: 0px;
+    border-top: 0px;
+    height: 20px;
+    outline: none;
 }
-#el7{
-    
+#star{
+    display: none;
+    font-style: italic;
+    text-align: center;
 }
+.goback{
+    display: none;
+    margin: 30px 0px 0px 0px;
+}
+.animateOutY {
+    animation: slideOutY 1s forwards;
+}
+@keyframes slideOutY {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+.checkbox-container {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.checkbox-container input[type="checkbox"] {
+    display: none;
+}
+.checkbox-container input[type="radio"] {
+    display: none;
+}
+.checkmark {
+    width: 24px;
+    height: 24px;
+    border: 1px solid black;
+    border-radius: 50%;
+    position: relative;
+    display: inline-block;
+    background-color: white;
+    box-shadow: 1px 3px 0px black;
+}
+
+.checkbox-container input:checked + .checkmark {
+    background-color: #DEF6B1;
+}
+
+/* 
+.checkbox-container input:checked + .checkmark:before {
+    background: url(images/Ellipse\ 1.svg);
+    content: "";
+    position: absolute;
+    width: 24px;
+    height: 24px;
+} */
