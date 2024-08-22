@@ -36,15 +36,24 @@ let butS = document.querySelector('.start');
 let nb = document.querySelector('.next-back');
 let input = document.getElementById('fio');
 let star = document.getElementById('star');
-let dasha = document.querySelector('header > h2:last-of-type');
-let danic = document.querySelector('header > h2:first-of-type');
-let line = document.getElementsByClassName('line');
+let wingL = document.getElementById('lineR');
+let wingR = document.getElementById('lineL');
 const testDiv = document.getElementsByClassName('test');
 /* setTimeout(function() {
         
 }, 2000); */
-window.onload = start();
+window.onload = start;
 
+function fly()
+{
+    wingL.classList.add('flyl');
+    wingR.classList.add('flyr');
+}
+function land()
+{
+    wingL.classList.remove('flyl');
+    wingR.classList.remove('flyr');
+}
 function start() {
     document.body.classList.remove('animateOutY');
     document.body.classList.add('animateInsideBack');
@@ -67,12 +76,13 @@ function restart() {
 
 }
 function next() {
-    alert("bb: " + bb + " b: " + b + " n:" + n);
+    //alert("bb: " + bb + " b: " + b + " n:" + n);
     if (n != 7) {
         let blockBack = getElementByIndex(b);
         /* if (inspect(blockBack) == false)
             return; */
         let blockNext = getElementByIndex(n);
+        
         deleteAllClasses(quest);
         quest.offsetWidth;
         quest.classList.add('animateP');
@@ -80,13 +90,13 @@ function next() {
         animate(blockBack, 2);
 
         setTimeout(function () {
-
+            quest.innerText = getQuestionTextById(n);
 
             if (blockBack != null)
                 blockBack.style.display = 'none';
             if (blockNext != null)
                 blockNext.style.display = 'flex';
-
+                
             animate(blockNext, 1);
 
             if (n == 1) {
@@ -106,13 +116,13 @@ function next() {
             }
             n++; b++;
             if (b > 1) bb++;
-            alert("%bb: " + bb + " b: " + b + " n:" + n);
+            //alert("%bb: " + bb + " b: " + b + " n:" + n);
         }, 1000);
 
     }
 }
 function back() {
-    alert("bb: " + bb + " b: " + b + " n:" + n);
+    //alert("bb: " + bb + " b: " + b + " n:" + n);
     if (b != 0) {
         let blockBack = getElementByIndex(bb);
         let blockNext = getElementByIndex(b);
@@ -144,7 +154,7 @@ function back() {
             //alert(7);
 
             n--; b--; if (b > 0) bb--;
-            alert("%bb: " + bb + " b: " + b + " n:" + n);
+            //alert("%bb: " + bb + " b: " + b + " n:" + n);
         }, 1000);
     }
 
@@ -305,10 +315,10 @@ function deleteAllClasses(block) {
 }
 function getQuestionTextById(id) {
     // Ищем вопрос по id
-    alert();
+    //alert();
     const question = data.questions.find(q => q.id === id);
-    alert(id);
-    alert(question);
+   // alert(id);
+    //alert(question);
     // Если вопрос найден, возвращаем его текст, иначе возвращаем null или сообщение об ошибке
     return question ? question.text : `Вопрос с id ${id} не найден.`;
 }

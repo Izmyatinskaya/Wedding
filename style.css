@@ -4,6 +4,7 @@ body{
     margin: auto;
     display: flex;
     flex-direction: column;
+    overflow-x:hidden; 
 }
 main, header{
     display: flex;
@@ -164,19 +165,58 @@ p, button, input{
 #lineR{
     position: absolute;
     align-self: flex-end;
-    margin: 0px 0px 43px 0px;
+    margin: 30px 7px 0px 0px;
     display: none;
 }
 #lineL{
     position: absolute;
     align-self: flex-start;
-    margin: 38px 0px 0px 0px;
+    margin: 30px 0px 0px 7px;
     display: none;
 }
+
+.flyr {
+    animation: flyr 1s forwards infinite;
+}
+@keyframes flyr {
+    0% {
+        transform: scaleY(1);
+        margin: 30px 7px 0px 0px;
+    }
+    50% {
+        transform: scaleY(-1);
+        margin: 0px 7px 20px 0px;
+    }
+    100% {
+        transform: scaleY(1);
+        margin: 30px 7px 0px 0px;
+    }
+}
+
+.flyl {
+    animation: flyl 1s forwards infinite;
+}
+@keyframes flyl {
+    0% {
+        transform: scaleY(1);
+        margin: 30px 0px 0px 7px;
+    }
+    50% {
+        transform: scaleY(-1);
+        margin: 0px 7px 20px 0px;
+    }
+    100% {
+        transform: scaleY(1);
+        margin: 30px 0px 0px 7px;
+    }
+}
+
 .default-button:hover ~ #lineR, 
 .default-button:hover ~ #lineL {
     display: block;
 }
+
+
 #fio{
     background: white;
     border: 1px solid black;
@@ -232,15 +272,33 @@ svg{
    /*  align-self: flex-start; */
 }
 #el2{
+    margin-left: 225px;
+}
+#el3{
     margin-left: 347px;
     margin-top: 89px;
     /* align-self: flex-end; */
 }
-#el3{
+#el4{
     margin-right: 291px;
     margin-top: 238px;
 }
-
+#el5{
+    margin-top: 421px;
+    margin-left: 215px;
+}
+#el6{
+    margin-top: 514px;
+    margin-right: 202px;
+}
+#el7{
+    margin-top: 683px;
+    margin-left: 366px;
+}
+#el8{
+    margin-top: 731px;
+    margin-right: 309px;
+}
 .test{
     display:none;
     flex-direction: column;
@@ -286,6 +344,27 @@ svg{
         opacity: 0;
     }
 }
+
+.shake-rotate {
+    display: inline-block;
+}
+
+.shake-rotate:hover {
+    animation: shake-rotate 0.5s ease-in-out infinite;
+}
+
+@keyframes shake-rotate {
+    0%, 100% {
+        transform: rotate(0deg);
+    }
+    25% {
+        transform: rotate(-3deg);
+    }
+    75% {
+        transform: rotate(3deg);
+    }
+}
+
 .checkbox-container {
     display: inline-block;
     position: relative;
