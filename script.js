@@ -30,6 +30,14 @@ const data = {
         }
     ]
 };
+let formData = {
+    fullName: "",
+    allergy: "",
+    allergyDetail: "",
+    alcohol: [],
+    wine: [],
+    transfer: ""
+};
 let bb = 0, b = 0, n = 1;
 let quest = document.getElementById('question');
 let butS = document.querySelector('.start');
@@ -43,7 +51,54 @@ const testDiv = document.getElementsByClassName('test');
         
 }, 2000); */
 window.onload = start;
+//идентификатор развертывания
+//AKfycbwDjkU_rY_kJ5Ct7_yo1clIpQx5rSqJYnE5PzGZd4fINN9odaQXkCU7LYc5erM1jVfI
+//URL
+//https://script.google.com/macros/s/AKfycbwDjkU_rY_kJ5Ct7_yo1clIpQx5rSqJYnE5PzGZd4fINN9odaQXkCU7LYc5erM1jVfI/exec
+function submitForm() {
 
+    // Формируем данные для отправки
+    let submissionData = new FormData();
+    submissionData.append("fullName", formData.fullName);
+    submissionData.append("allergies", formData.allergy === "Да" ? `Да\n${formData.allergyDetail}` : "Нет");
+    submissionData.append("alcohol", formData.alcohol.join('\n'));
+    submissionData.append("wine", formData.wine.join('\n'));
+    submissionData.append("transfer", formData.transfer);
+
+    // Отправка данных на Google Sheets
+    fetch('https://script.google.com/macros/s/AKfycbwDjkU_rY_kJ5Ct7_yo1clIpQx5rSqJYnE5PzGZd4fINN9odaQXkCU7LYc5erM1jVfI/exec', {
+        method: 'POST',
+        body: submissionData
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.status === 'success') {
+            alert("Спасибо! Ваши данные отправлены.");
+        } else {
+            alert("Произошла ошибка. Пожалуйста, попробуйте снова.");
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+}
+
+function removeInputs()
+{
+    input.value ="";
+    for (let i = 0; i < testDiv.length; i++) {
+        var div = testDiv[i];
+        punkts = div.querySelectorAll('input');
+        for (let j = 0; j < punkts.length; j++) {
+            if(i == 0 & j == 1)
+            punkts[j].value = "";
+            punkts[j].checked = 'false';
+            
+        }
+    }
+    
+    
+}
 function fly()
 {
     wingL.classList.add('flyl');
@@ -60,6 +115,7 @@ function start() {
     //dasha.classList.add('animateInsideBack');
 }
 function restart() {
+    alert();
     document.body.classList.remove('animateInsideBack');
     document.body.classList.add('animateOutY');
     setTimeout(function () {
@@ -73,14 +129,14 @@ function restart() {
         start();
         bb = 0, b = 0, n = 1;
     }, 1000);
-
+    removeInputs();
 }
 function next() {
     //alert("bb: " + bb + " b: " + b + " n:" + n);
     if (n != 7) {
         let blockBack = getElementByIndex(b);
-        /* if (inspect(blockBack) == false)
-            return; */
+        if (inspect(blockBack) == false)
+            return;
         let blockNext = getElementByIndex(n);
         
         deleteAllClasses(quest);
@@ -112,8 +168,10 @@ function next() {
                 star.style.display = 'flex';
                 deleteAllClasses(star);
                 star.classList.add('animateInside');
-
             }
+            if(b==5)
+            submitForm();
+
             n++; b++;
             if (b > 1) bb++;
             //alert("%bb: " + bb + " b: " + b + " n:" + n);
@@ -129,7 +187,6 @@ function back() {
         deleteAllClasses(quest);
         quest.offsetWidth;
         quest.classList.add('animatePBack');
-
 
         animate(blockNext, 3);
         if (n == 2) {
@@ -166,26 +223,38 @@ function inspect(block) {
         let yes, no;
 
         switch (b) {
-            case 1:  //alert(block.value);
+            case 1: 
+            if(block.value == "")
+            {
+                alert("Вы не ввели своё имя и фамилию");
+                return false;
+            }
+            formData.fullName = block.value;
                 break;
             case 2:
                 var div = testDiv[0];
                 punkts = div.querySelectorAll('input');
                 
-                 yes = punkts[0];
-                 no = punkts[2];
+                yes = punkts[0];
+                no = punkts[2];
                 txt = punkts[1];
                 
-                /* if (!yes.checked & !no.checked) {
+                if (!yes.checked & !no.checked) {
                     alert("Выберите хотя бы 1 вариант ответа!");
                     return false;
-                } else */
+                } else
                 if (yes.checked) {
-                    alert(punkts.length);
-                    alert("Есть: " + txt.value);
+                    if(txt.value != ""){
+                    formData.allergy = "Есть";
+                    formData.allergyDetail = txt.value;
+                    }
+                    else{
+                        alert("Укажите на что конкретно у вас аллергии");
+                        return false;
+                    }
                 }
                 else if (no.checked) {
-                    alert("Нет");
+                    formData.allergy = "Нет";
                 }
                 break;
             case 3:
@@ -201,12 +270,17 @@ function inspect(block) {
                         txt += txts[i].textContent + ", ";
                     }
                 }
-                /* if(c==0)
+                if(c==0)
                 {
                     alert("Выберите хотя бы 1 вариант ответа!");
                     return false;
                 }
-                else  */alert(txt.slice(0, txt.length-2));
+                else {
+                    for (let i = 0; i < punkts.length; i++) {
+                        if(punkts[i].checked) 
+                        formData.alcohol.push(txts[i].textContent);
+                    }
+                }
             break;
             case 4:
                 c=0; 
@@ -221,15 +295,21 @@ function inspect(block) {
                         txt += txts[i].textContent + ", ";
                     }
                 }
-                /* if(c==0)
+                if(c==0)
                 {
                     alert("Выберите хотя бы 1 вариант ответа!");
                     return false;
                 }
-                else  */alert(txt.slice(0, txt.length-2));
+                else 
+                {
+                    for (let i = 0; i < punkts.length; i++) {
+                        if(punkts[i].checked) 
+                        formData.wine.push(txts[i].textContent);
+                    }
+                }
             break;
-            case 2:
-                var div = testDiv[0];
+            case 5:
+                var div = testDiv[3];
                 punkts = div.querySelectorAll('input');
                 
                 yes = punkts[0];
@@ -240,11 +320,10 @@ function inspect(block) {
                     return false;
                 } else 
                  if (yes.checked) {
-                    alert(punkts.length);
-                    alert("Да");
+                    formData.transfer = "Да";
                 }
                 else if (no.checked) {
-                    alert("Нет");
+                    formData.transfer = "Нет";
                 }
                 break;
             default:
