@@ -47,7 +47,6 @@ function submitForm() {
         formData.alcohol.length,
         formData.wine.length
     );
-    alert(maxLength);
     for (let i = 0; i < maxLength; i++) {
         let submissionData = new FormData();
 
@@ -358,7 +357,7 @@ function uncheked() {
 function uncheked2() {
     let div = testDiv[1];
     let punkts = div.querySelectorAll('input');
-    punkts[5].checked = false;
+    punkts[6].checked = false;
 }
 function uncheked3() {
     let div = testDiv[2];
