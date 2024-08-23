@@ -164,23 +164,24 @@
                 </defs>
                 </svg> 
         </div>
-        <input id="fio" name="block">
+        <input id="fio" name="block" oninput="checkInput(this)" placeholder="Фамилия и имя">
 
         <div class="test" name="block">
             <div class="punkt">
                 <label class="checkbox-container">
                     <input type="radio" name="alergy">
                     <span class="checkmark"></span>
+                    <p>Да, есть (укажите какие):</p>
                 </label>
-                <p>Да, есть (укажите какие):</p>
-                <input id="allergy">
+                <input id="allergy" oninput="checkInput(this)" placeholder="Перечислите аллергии">
             </div>  
             <div class="punkt">
                 <label class="checkbox-container">
                     <input type="radio" name="alergy">
                     <spans class="checkmark"></spans>
+                    <p>Нет, нету аллергий</p>
                 </label>
-                <p>Нет, нету аллергий</p>
+                
             </div>
         </div>
 
@@ -189,43 +190,43 @@
                 <label class="checkbox-container">
                     <input type="checkbox" onchange="uncheked2()">
                     <spans class="checkmark"></spans>
+                    <p>Пиво</p>
                 </label>
-                <p>Пиво</p>
             </div>
             <div class="punkt">
                 <label class="checkbox-container">
                     <input type="checkbox" onchange="uncheked2()">
                     <spans class="checkmark"></spans>
+                    <p>Белое вино</p>
                 </label>
-                <p>Белое вино</p>
             </div>
             <div class="punkt">
                 <label class="checkbox-container">
                     <input type="checkbox" onchange="uncheked2()">
                     <spans class="checkmark"></spans>
+                    <p>Красное вино</p>
                 </label>
-                <p>Красное вино</p>
             </div>
             <div class="punkt">
                 <label class="checkbox-container">
                     <input type="checkbox" onchange="uncheked2()">
                     <spans class="checkmark"></spans>
+                    <p>Шампанское и игристые вина</p>
                 </label>
-                <p>Шампанское и игристые вина</p>
-            </div>
+                </div>
             <div class="punkt">
                 <label class="checkbox-container">
                     <input type="checkbox" onchange="uncheked2()">
                     <spans class="checkmark"></spans>
+                    <p>Крепкие напитки (водка, виски и др.)</p>
                 </label>
-                <p>Крепкие напитки (водка, виски и др.)</p>
             </div>
             <div class="punkt">
                 <label class="checkbox-container">
                     <input type="checkbox" onchange="uncheked()">
                     <spans class="checkmark"></spans>
+                    <p>Не пью (на свадьбе пить не собираетесь)</p>
                 </label>
-                <p>Не пью (на свадьбе пить не собираетесь)</p>
             </div>
         </div>
 
@@ -234,36 +235,36 @@
                 <label class="checkbox-container">
                     <input type="checkbox" onchange="uncheked4()">
                     <spans class="checkmark"></spans>
+                    <p>Сладкое</p>
                 </label>
-                <p>Сладкое</p>
             </div>
             <div class="punkt">
                 <label class="checkbox-container">
                     <input type="checkbox" onchange="uncheked4()">
                     <spans class="checkmark"></spans>
+                    <p>Полусладкое</p>
                 </label>
-                <p>Полусладкое</p>
             </div>
             <div class="punkt">
                 <label class="checkbox-container">
                     <input type="checkbox" onchange="uncheked4()">
                     <spans class="checkmark"></spans>
+                    <p>Полусухое</p>
                 </label>
-                <p>Полусухое</p>
             </div>
             <div class="punkt">
                 <label class="checkbox-container">
                     <input type="checkbox" onchange="uncheked4()">
                     <spans class="checkmark"></spans>
+                    <p>Сухое</p>
                 </label>
-                <p>Сухое</p>
             </div>
             <div class="punkt">
                 <label class="checkbox-container">
                     <input type="checkbox" onchange="uncheked3()">
                     <spans class="checkmark"></spans>
+                    <p>Нет предпочтений</p>
                 </label>
-                <p>Нет предпочтений</p>
             </div>
         </div>
 
@@ -272,15 +273,15 @@
                 <label class="checkbox-container">
                     <input type="radio" name="transport">
                     <spans class="checkmark"></spans>
+                    <p>Да</p>
                 </label>
-                <p>Да</p>
             </div>
             <div class="punkt">
                 <label class="checkbox-container">
                     <input type="radio" name="transport">
                     <spans class="checkmark"></spans>
+                    <p>Нет</p>
                 </label>
-                <p>Нет</p>
             </div>
         </div>
         <div class="goback" name="block">
@@ -315,6 +316,26 @@
         </div>
 
         <p id="star">*для других членов семьи, либо в случае ошибок<br>при предыдущем прохождении</p>
+
+        <!-- Затемнение фона -->
+    <div id="modalOverlay" class="modal-overlay"></div>
+
+    <!-- Модальное окно -->
+    <div id="modal" class="modal">
+        <button class="close-btn" id="closeModalBtn" onclick="closeModal()">&times;</button>
+        <div id="modalContent">
+            <div class="loader" id="loader"></div>
+            <h2>Заголовок окна</h2>
+            <p>Это пример всплывающего окна. Вы можете добавить сюда любой контент.</p>
+        </div>
+    </div>
+
+
+    <div class="modal modal2">
+        <button class="close-btn" onclick="closeModal2()">&times;</button>
+            <p>Выберите хотя бы 1 вариант ответа!</p>
+    </div>
+
     </main>
     <footer>
         <p>Made by Даша, которая скучала на работе</p>

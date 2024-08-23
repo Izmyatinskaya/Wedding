@@ -120,6 +120,8 @@ p, button, input{
     width: 123px;
     height: 23px;
     box-shadow: 1px 3px 0px black;
+    color: black;
+    outline: none;
 }
 .default-button>p{
     margin: 0px;
@@ -365,10 +367,86 @@ svg{
     }
 }
 
+
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Стиль для модального окна */
+.modal {
+    display: none;
+    position: fixed;
+    top: 25%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    text-align: center;
+    border-radius: 10px;
+    max-width: 500px;
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+.modal2{
+    top: 21%;
+}
+/* Плавное появление модального окна */
+.modal.show {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+/* Кнопка для закрытия модального окна */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Колесо загрузки */
+.loader {
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 4px solid #bdd68d;
+    width: 30px;
+    height: 30px;
+    animation: spin 2s linear infinite;
+    margin: 0 auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Стиль скрытия колеса загрузки */
+.hidden {
+    display: none;
+}
+
 .checkbox-container {
-    display: inline-block;
+    display: flex;
     position: relative;
     cursor: pointer;
+    flex-direction: row;
+    gap: 10px;
 }
 
 .checkbox-container input[type="checkbox"] {
@@ -392,6 +470,8 @@ svg{
     background-color: #DEF6B1;
 }
 
+
+/* цвет для инпута #f6b1b1 */
 /* 
 .checkbox-container input:checked + .checkmark:before {
     background: url(images/Ellipse\ 1.svg);
