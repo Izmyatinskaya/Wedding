@@ -129,7 +129,7 @@ function next() {
             }
             n++; b++;
             if (b > 1) bb++;
-            //alert("%bb: " + bb + " b: " + b + " n:" + n);
+            //alert("%bb: " + bb + " b: " + b + " n:" + n); block
         }, 1000);
     }
 }
@@ -414,7 +414,7 @@ function getQuestionTextById(id) {
 }
 function getElementByIndex(index) {
 
-    let collection = document.getElementsByName('block');
+    let collection = document.getElementsByClassName('block');
 
     // Проверяем, находится ли индекс в пределах допустимого диапазона
     if (index >= 0 && index < collection.length) {
